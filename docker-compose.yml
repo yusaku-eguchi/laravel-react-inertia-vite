@@ -52,6 +52,12 @@ services:
             - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025'
         networks:
             - sail
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:5.2
+        environment:
+            PMA_HOST: 'mysql'
+        ports:
+        - '${PHP_MY_ADMIN_PORT:-3000}:80'
 networks:
     sail:
         driver: bridge
