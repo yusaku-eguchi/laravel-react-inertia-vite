@@ -27,10 +27,8 @@ export default function Register() {
     };
 
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
-        console.log("登録処理実行");
         e.preventDefault();
         post(route("admin.register"));
-        console.log("登録処理完了");
     };
 
     return (

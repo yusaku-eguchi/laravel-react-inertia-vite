@@ -1,5 +1,10 @@
-import { useForm } from "@inertiajs/inertia-react";
+import { Head, useForm } from "@inertiajs/inertia-react";
 import React, { useEffect } from "react";
+import SubmitButton from "@/Components/SubmitButton";
+import Guest from "../../../Layout/Guest";
+import Label from "@/Components/Label";
+import Input from "@/Components/Input";
+import Checkbox from "@/Components/Checkbox";
 
 export default function Login() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -14,7 +19,7 @@ export default function Login() {
         };
     }, []);
 
-    const onHandleChange = (event) => {
+    const onHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setData(
             event.target.name,
             event.target.type === "checkbox"
@@ -28,36 +33,44 @@ export default function Login() {
         post(route("admin.login"));
     };
     return (
-        <form onSubmit={submit}>
-            <div>
-                <div>メールアドレス</div>
-                <input
-                    type="text"
-                    name="email"
-                    value={data.email}
-                    onChange={(e) => onHandleChange(e)}
-                />
-                <div>{errors.email}</div>
-            </div>
-            <div>
-                <div>パスワード</div>
-                <input
-                    type="password"
-                    name="password"
-                    value={data.password}
-                    onChange={(e) => onHandleChange(e)}
-                />
-                <div>{errors.password}</div>
-            </div>
-            <div>
-                <input
-                    type="checkbox"
-                    name="remember"
-                    value={data.remember}
-                    onChange={(e) => onHandleChange(e)}
-                />
-            </div>
-            <input type="submit" />
-        </form>
+        <Guest title="管理者ログイン">
+            <Head title="管理者ログイン" />
+            <form onSubmit={submit}>
+                <div>
+                    <Label forInput="name" value="メールアドレス" />
+                    <Input
+                        type="text"
+                        name="email"
+                        value={data.email}
+                        autoComplete="username"
+                        isFocused={true}
+                        handleChange={onHandleChange}
+                        required
+                    />
+                    <div>{errors.email}</div>
+                </div>
+                <div>
+                    <Label forInput="name" value="パスワード" />
+                    <Input
+                        type="password"
+                        name="password"
+                        value={data.password}
+                        autoComplete="current-password"
+                        isFocused={true}
+                        handleChange={onHandleChange}
+                    />
+                    <div>{errors.password}</div>
+                </div>
+                <div>
+                    <Checkbox
+                        name="remember"
+                        value={data.remember}
+                        handleChange={onHandleChange}
+                    />
+                    ログインを記憶する
+                </div>
+                <SubmitButton>ログイン</SubmitButton>
+            </form>
+        </Guest>
     );
 }
