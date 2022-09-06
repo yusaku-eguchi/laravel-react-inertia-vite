@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Route;
-use App\Http\Requests\Admin\LoginRequest;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\User\LoginRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -18,8 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Auth/Login', [
-            'canResetPassword' => Route::has('admin.password.reset'),
+        return Inertia::render('User/Auth/Login', [
             'status' => session('status'),
         ]);
     }
@@ -47,7 +45,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        Auth::guard('admin')->logout();
+        Auth::logout();
 
         $request->session()->invalidate();
 
