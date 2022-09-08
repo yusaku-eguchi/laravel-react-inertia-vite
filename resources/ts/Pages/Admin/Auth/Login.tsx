@@ -1,7 +1,7 @@
 import { Head, useForm } from "@inertiajs/inertia-react";
 import React, { useEffect } from "react";
 import SubmitButton from "@/Components/SubmitButton";
-import Guest from "../../../Layout/Guest";
+import Guest from "@/Layout/Guest";
 import Label from "@/Components/Label";
 import Input from "@/Components/Input";
 import Checkbox from "@/Components/Checkbox";
@@ -36,11 +36,12 @@ export default function Login() {
         <Guest title="管理者ログイン">
             <Head title="管理者ログイン" />
             <form onSubmit={submit}>
-                <div>
+                <div className="mt-4">
                     <Label forInput="name" value="メールアドレス" />
                     <Input
                         type="text"
                         name="email"
+                        className="mt-4 block w-full"
                         value={data.email}
                         autoComplete="username"
                         isFocused={true}
@@ -49,11 +50,12 @@ export default function Login() {
                     />
                     <div>{errors.email}</div>
                 </div>
-                <div>
+                <div className="mt-4">
                     <Label forInput="name" value="パスワード" />
                     <Input
                         type="password"
                         name="password"
+                        className="mt-3 block w-full"
                         value={data.password}
                         autoComplete="current-password"
                         isFocused={true}
@@ -61,15 +63,19 @@ export default function Login() {
                     />
                     <div>{errors.password}</div>
                 </div>
-                <div>
+                <div className="mt-4">
                     <Checkbox
                         name="remember"
                         value={data.remember}
                         handleChange={onHandleChange}
                     />
-                    ログインを記憶する
+                    <span className="ml-2 text-gray-700">
+                        ログインを記憶する
+                    </span>
                 </div>
-                <SubmitButton>ログイン</SubmitButton>
+                <div className="mt-4">
+                    <SubmitButton>ログイン</SubmitButton>
+                </div>
             </form>
         </Guest>
     );
