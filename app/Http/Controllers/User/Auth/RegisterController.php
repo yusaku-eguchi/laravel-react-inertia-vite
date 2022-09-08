@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +18,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Auth/Register');
+        return Inertia::render('User/Auth/Register');
     }
 
     /**
@@ -33,18 +33,18 @@ class RegisterController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:admins',
             // passwordのバリデーションを後で修正する
             'password' => ['required', 'confirmed']
         ]);
 
-        $admin = Admin::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        Auth::guard('admin')->login($admin);
+        Auth::login($user);
 
         return redirect('/home');
     }

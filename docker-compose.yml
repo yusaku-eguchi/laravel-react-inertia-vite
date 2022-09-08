@@ -55,9 +55,15 @@ services:
     phpmyadmin:
         image: phpmyadmin/phpmyadmin:5.2
         environment:
+            PMA_USER: '${DB_USERNAME}'
+            PMA_PASSWORD: '${DB_PASSWORD}'
             PMA_HOST: 'mysql'
+        links:
+          - mysql:mysql
         ports:
-        - '${PHP_MY_ADMIN_PORT:-3000}:80'
+            - '${PHP_MY_ADMIN_PORT:-3000}:80'
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge

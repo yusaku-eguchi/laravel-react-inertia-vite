@@ -1,3 +1,4 @@
+import Authenticated from "@/Layout/Admin/Authenticated";
 import { Inertia } from "@inertiajs/inertia";
 import React from "react";
 
@@ -8,11 +9,11 @@ export default function Home() {
     };
 
     return (
-        <>
-            <div>ログイン成功しました</div>
+        <Authenticated>
+            <div>管理者画面：ログイン成功しました</div>
             <form onSubmit={submit}>
                 <input type="submit" value="ログアウト" />
             </form>
-        </>
+        </Authenticated>
     );
 }

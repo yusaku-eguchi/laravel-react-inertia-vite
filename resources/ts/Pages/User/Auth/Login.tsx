@@ -30,11 +30,11 @@ export default function Login() {
 
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        post(route("admin.login"));
+        post(route("login"));
     };
     return (
-        <Guest title="管理者ログイン">
-            <Head title="管理者ログイン" />
+        <Guest title="ユーザーログイン">
+            <Head title="ユーザーログイン" />
             <form onSubmit={submit}>
                 <div className="mt-4">
                     <Label forInput="name" value="メールアドレス" />

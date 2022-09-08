@@ -212,4 +212,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'domain' => env('APP_DOMAIN','localhost'),
+    'admin_subdomain' => env('ADMIN_SUBDOMAIN', 'admin'),
+    'user_subdomain' => env('USER_SUBDOMAIN', 'user'),
 ];

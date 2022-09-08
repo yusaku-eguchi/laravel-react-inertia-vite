@@ -28,13 +28,13 @@ export default function Register() {
 
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        post(route("admin.register"));
+        post(route("register"));
     };
 
     return (
         <>
-            <Head title="管理者登録" />
-            <div>管理者登録</div>
+            <Head title="ユーザー登録" />
+            <div>ユーザー登録</div>
             <form onSubmit={submit}>
                 <div>
                     <div>氏名</div>
