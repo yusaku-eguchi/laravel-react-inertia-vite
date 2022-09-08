@@ -1,6 +1,11 @@
-import React from "react";
-import { useForm, Head } from "@inertiajs/inertia-react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+// import Button from "@/Components/Button";
+import Guest from "@/Layout/Guest";
+import Input from "@/Components/Input";
+// import InputError from "@/Components/InputError";
+import Label from "@/Components/Label";
+import { Head, Link, useForm } from "@inertiajs/inertia-react";
+import SubmitButton from "@/Components/SubmitButton";
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -9,7 +14,6 @@ export default function Register() {
         password: "",
         password_confirmation: "",
     });
-    console.log(errors);
 
     useEffect(() => {
         return () => {
@@ -28,56 +32,94 @@ export default function Register() {
 
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
         post(route("register"));
     };
 
     return (
-        <>
-            <Head title="ユーザー登録" />
-            <div>ユーザー登録</div>
+        <Guest title="会員登録">
+            <Head title="会員登録" />
+
             <form onSubmit={submit}>
                 <div>
-                    <div>氏名</div>
-                    <input
+                    <Label forInput="name" value="名前" />
+
+                    <Input
                         type="text"
                         name="name"
                         value={data.name}
-                        onChange={(e) => onHandleChange(e)}
+                        className="mt-1 block w-full"
+                        autoComplete="name"
+                        isFocused={true}
+                        handleChange={onHandleChange}
+                        required
                     />
-                    <div>{errors.name}</div>
+
+                    {/* <InputError message={errors.name} className="mt-2" /> */}
                 </div>
-                <div>
-                    <div>メールアドレス</div>
-                    <input
-                        type="text"
+
+                <div className="mt-4">
+                    <Label forInput="email" value="メールアドレス" />
+
+                    <Input
+                        type="email"
                         name="email"
                         value={data.email}
-                        onChange={(e) => onHandleChange(e)}
+                        className="mt-1 block w-full"
+                        autoComplete="username"
+                        handleChange={onHandleChange}
+                        required
                     />
-                    <div>{errors.email}</div>
+
+                    {/* <InputError message={errors.email} className="mt-2" /> */}
                 </div>
-                <div>
-                    <div>パスワード</div>
-                    <input
-                        type="text"
+
+                <div className="mt-4">
+                    <Label forInput="password" value="パスワード" />
+
+                    <Input
+                        type="password"
                         name="password"
                         value={data.password}
-                        onChange={(e) => onHandleChange(e)}
+                        className="mt-1 block w-full"
+                        autoComplete="new-password"
+                        handleChange={onHandleChange}
+                        required
                     />
-                    <div>{errors.password}</div>
+
+                    {/* <InputError message={errors.password} className="mt-2" /> */}
                 </div>
-                <div>
-                    <div>パスワード確認</div>
-                    <input
-                        type="text"
+
+                <div className="mt-4">
+                    <Label
+                        forInput="password_confirmation"
+                        value="パスワード（確認）"
+                    />
+
+                    <Input
+                        type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
-                        onChange={(e) => onHandleChange(e)}
+                        className="mt-1 block w-full"
+                        handleChange={onHandleChange}
+                        required
                     />
-                    <div>{errors.password_confirmation}</div>
+
+                    {/* <InputError message={errors.password_confirmation} className="mt-2" /> */}
                 </div>
-                <input type="submit" />
+
+                <div className="flex items-center justify-start mt-4">
+                    <Link
+                        href={route("login")}
+                        className="underline text-sm text-gray-600 hover:text-gray-900"
+                    >
+                        すでにアカウントをお持ちですか？
+                    </Link>
+                </div>
+                <div className="mt-4">
+                    <SubmitButton>登録</SubmitButton>
+                </div>
             </form>
-        </>
+        </Guest>
     );
 }

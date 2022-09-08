@@ -5,9 +5,9 @@ type Props = {
     name: string;
     value: string;
     className?: string;
-    autoComplete: string;
+    autoComplete?: string;
     required?: boolean;
-    isFocused: boolean;
+    isFocused?: boolean;
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 

@@ -1,4 +1,4 @@
-import { Head, useForm } from "@inertiajs/inertia-react";
+import { Head, Link, useForm } from "@inertiajs/inertia-react";
 import React, { useEffect } from "react";
 import SubmitButton from "@/Components/SubmitButton";
 import Guest from "@/Layout/Guest";
@@ -72,6 +72,14 @@ export default function Login() {
                     <span className="ml-2 text-gray-700">
                         ログインを記憶する
                     </span>
+                </div>
+                <div className="flex items-center justify-start mt-4">
+                    <Link
+                        href={route("register")}
+                        className="underline text-sm text-gray-600 hover:text-gray-900"
+                    >
+                        アカウントを作成する
+                    </Link>
                 </div>
                 <div className="mt-4">
                     <SubmitButton>ログイン</SubmitButton>
