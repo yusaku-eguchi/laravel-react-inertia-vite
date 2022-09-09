@@ -1,4 +1,4 @@
-import Authenticated from "@/Layout/Admin/Authenticated";
+import Authenticated from "@/Components/User/SideBar";
 import { Inertia } from "@inertiajs/inertia";
 import React from "react";
 
