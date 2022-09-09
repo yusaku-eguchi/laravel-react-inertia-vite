@@ -1,21 +1,21 @@
 import { Link } from "@inertiajs/inertia-react";
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useContext, useState } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as VscIcon from "react-icons/vsc";
 import { SidebarData } from "@/Components/SideBarData";
 import { IconContext } from "react-icons";
 import { UserMenuData } from "@/Components/Admin/UserMenuData";
+import { SideBarContext } from "@/Provider/SideBarProvider";
 
 type Props = {
     children: ReactNode;
 };
 
-export default function Authenticated(props: Props) {
-    const [sideBar, setSideBar] = useState(false);
+export default function SideBar(props: Props) {
+    const { sideBar, showSideBar } = useContext(SideBarContext);
     const [userMenu, setUserMenu] = useState(false);
 
-    const showSideBar = () => setSideBar(!sideBar);
     const showUserMenu = () => setUserMenu(!userMenu);
 
     return (
@@ -88,9 +88,12 @@ export default function Authenticated(props: Props) {
                 </ul>
             </nav>
             <div
-                className={`duration-100 fixed left-0 mt-6 ml-6 ${
-                    sideBar && "left-64"
-                } `}
+                // className={`duration-100 mt-6 w-9/12 mx-auto bg-blue-100  ${
+                //     sideBar && "w-[calc(75%-16rem)] pl-64"
+                // } `}
+                className={`duration-100 w-11/12 mx-auto mt-10 ${
+                    sideBar && "pl-64"
+                }`}
             >
                 {props.children}
             </div>

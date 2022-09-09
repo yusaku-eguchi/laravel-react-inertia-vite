@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\User\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\User\Auth\RegisterController;
+use App\Http\Controllers\User\HomeController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -63,8 +64,6 @@ Route::middleware('auth')->group(function () {
     })->middleware('throttle:6,1')->name('verification.send');
 
     Route::middleware('verified')->group(function() {
-        Route::get('home', function () {
-            return Inertia::render('User/Home');
-        })->name('user.home');
+        Route::get('/home', [HomeController::class, 'index'])->name('home');
     });
 });
