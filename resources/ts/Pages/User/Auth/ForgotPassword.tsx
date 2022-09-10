@@ -1,12 +1,14 @@
+import FlashMessage from "@/Components/FlashMessage";
 import Input from "@/Components/Input";
 import Label from "@/Components/Label";
 import SubmitButton from "@/Components/SubmitButton";
 import Guest from "@/Layout/Guest";
-import { Head, useForm } from "@inertiajs/inertia-react";
+import { Head, useForm, usePage } from "@inertiajs/inertia-react";
 import React from "react";
 
-export default function ForgotPassword(props) {
-    const { data, setData, post } = useForm({ email: "" });
+export default function ForgotPassword() {
+    const { data, setData, post, processing } = useForm({ email: "" });
+    const { flash } = usePage().props;
 
     const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
         setData(e.target.name, e.target.value);
@@ -30,8 +32,15 @@ export default function ForgotPassword(props) {
                     handleChange={onHandleChange}
                     required
                 />
+                {flash.message && (
+                    <FlashMessage
+                        message={flash.message}
+                        type="success"
+                        className="mt-4"
+                    />
+                )}
                 <div className="mt-4">
-                    <SubmitButton>送信</SubmitButton>
+                    <SubmitButton disabled={processing}>送信</SubmitButton>
                 </div>
             </form>
         </Guest>
