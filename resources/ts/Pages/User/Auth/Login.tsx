@@ -73,12 +73,18 @@ export default function Login() {
                         ログインを記憶する
                     </span>
                 </div>
-                <div className="flex items-center justify-start mt-4">
+                <div className="mt-4">
                     <Link
                         href={route("register")}
-                        className="underline text-sm text-gray-600 hover:text-gray-900"
+                        className="underline text-sm text-gray-600 hover:text-gray-900 block mt-2"
                     >
                         アカウントを作成する
+                    </Link>
+                    <Link
+                        href={route("forgot-password")}
+                        className="underline text-sm text-gray-600 hover:text-gray-900 block mt-2"
+                    >
+                        パスワードを忘れた
                     </Link>
                 </div>
                 <div className="mt-4">
