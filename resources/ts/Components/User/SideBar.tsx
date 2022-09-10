@@ -24,7 +24,7 @@ export default function SideBar(props: Props) {
                 <button className="ml-8 text-4xl bg-none">
                     <FaIcons.FaBars onClick={showSideBar} />
                 </button>
-                <div className="flex items-center mr-10">
+                <div className="flex items-center mr-10" onClick={showUserMenu}>
                     <button
                         className="border-2 rounded-full p-3"
                         onClick={showUserMenu}
@@ -38,7 +38,7 @@ export default function SideBar(props: Props) {
                     )}
                 </div>
                 <div
-                    className={`py-3 fixed top-24 right-10 w-64 border-gray-500 border-2 rounded-xl ${
+                    className={`py-3 fixed top-24 right-10 w-64 border-gray-500 border-2 rounded-xl bg-gray-100 ${
                         userMenu || "hidden"
                     }`}
                 >
