@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\AccountSettingsController;
 use App\Http\Controllers\User\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\User\Auth\RegisterController;
 use App\Http\Controllers\User\HomeController;
@@ -65,5 +66,7 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('verified')->group(function() {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
+        Route::get('account/settings', [AccountSettingsController::class, 'edit'])->name('user.account.settings');
+        Route::post('account/settings', [AccountSettingsController::class, 'update']);
     });
 });
