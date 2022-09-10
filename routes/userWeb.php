@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\User\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\User\Auth\ForgotPasswordController;
 use App\Http\Controllers\User\Auth\RegisterController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\Auth\PasswordResetController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,20 +17,23 @@ use Illuminate\Http\Request;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', function () {
-    if (Auth::check())
-    {
-        return redirect('/home');
-    }
+Route::middleware('guest')->group(function () {
+    Route::get('/', function () {
+        return redirect('/login');
+    });
 
-    return redirect('/login');
+    Route::get('register', [RegisterController::class, 'create'])->name('register');
+    Route::post('register', [RegisterController::class, 'store']);
+
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+
+    Route::get('forgot-password', [ForgotPasswordController::class, 'index'])->name('forgot-password');
+    Route::post('forgot-password', [ForgotPasswordController::class, 'store']);
+
+    Route::get('reset-password/{token}', [PasswordResetController::class, 'create'])->name('password.reset');
+    Route::post('reset-password', [PasswordResetController::class, 'store'])->name('password.update');
 });
-
-Route::get('register', [RegisterController::class, 'create'])->name('register');
-Route::post('register', [RegisterController::class, 'store']);
-
-Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
-Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
 Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('user.logout');

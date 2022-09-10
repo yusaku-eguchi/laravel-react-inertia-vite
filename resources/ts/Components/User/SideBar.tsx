@@ -5,7 +5,7 @@ import * as AiIcons from "react-icons/ai";
 import * as VscIcon from "react-icons/vsc";
 import { SidebarData } from "@/Components/SideBarData";
 import { IconContext } from "react-icons";
-import { UserMenuData } from "@/Components/Admin/UserMenuData";
+import { UserMenuData } from "@/Components/User/UserMenuData";
 import { SideBarContext } from "@/Provider/SideBarProvider";
 
 type Props = {
@@ -47,7 +47,7 @@ export default function SideBar(props: Props) {
                             <li key={index}>
                                 <Link
                                     href={item.path}
-                                    method="post"
+                                    method={item.method}
                                     className="flex justify-start items-center py-1 pl-4 hover:underline"
                                 >
                                     {item.icon}
