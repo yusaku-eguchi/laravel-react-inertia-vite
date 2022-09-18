@@ -4,7 +4,7 @@ export const UserMenuData = [
     {
         title: "ユーザー設定",
         method: "get",
-        path: "#",
+        path: route("user.settings"),
         icon: <FiIcon.FiUser color="black" className="text-xl" />,
     },
     {

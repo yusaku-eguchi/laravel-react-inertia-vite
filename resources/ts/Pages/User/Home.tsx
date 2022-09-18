@@ -1,6 +1,5 @@
 import PostCard from "@/Components/PostCard";
 import Authenticated from "@/Layout/User/Authenticated";
-import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-react";
 import React from "react";
 

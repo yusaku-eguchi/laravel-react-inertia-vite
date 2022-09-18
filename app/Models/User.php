@@ -15,6 +15,11 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory, Notifiable;
 
     /**
+     * mfa totp
+     */
+    public const MFA_TOTP = '1';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -23,6 +28,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'mfa_flag',
+        'mfa_type',
+        'google2fa_secret',
     ];
 
     /**
@@ -42,6 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'mfa_flag' => 'boolean',
     ];
 
     /**
@@ -51,4 +60,37 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Post::class);
     }
+
+    /**
+     * get google 2fa secret
+     *
+     * @return string
+     */
+    public function getGoogle2FASecret() : string
+    {
+        return $this->google2fa_secret;
+    }
+
+    /**
+     * set mfa type
+     *
+     * @param string
+     * @return void
+     */
+    public function setMfaType(string $mfaType) : void
+    {
+        $this->mfa_type = $mfaType;
+    }
+
+    /**
+     * set mfa flag
+     *
+     * @param bool
+     * @return void
+     */
+    public function setMfaFlag(bool $mfaFlag)
+    {
+        $this->mfa_flag = $mfaFlag;
+    }
+
 }
